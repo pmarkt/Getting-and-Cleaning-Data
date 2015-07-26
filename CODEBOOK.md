@@ -7,7 +7,8 @@
 The R code, run_analysis.R, demonstrates the ability to collect, work with, and clean a data set.The code analyzes data collected from Samsung Galaxy smartphone accelerometers. 
 
 The data was obtained from the following web link:
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
 A full description of the data is available at the site where the data was initially obtained:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
@@ -84,7 +85,7 @@ While working with the data, I receiving warning messages that some of the longe
 	  colnames(combined_table) <- gsub("bandsEnergy", "BE", colnames(combined_table)) 
 
 ## PART 3 
-of the assignment asked us to Use descriptive activity names to name the activities in the data set, for example, instead of an activity label of "1" or "5", use the associated activity name like "LAYING" or "SITTING". I read in the activity labels and activity names from the activity_labels.txt file. It also required a change of variable names, to prevent duplicate column names in the data after it was merged. I changed the column names and merged the combined_table with the activity_labels, putting the result into a new table "data3". (Again using "stringsAsFactors=F" when reading the activity labels, so they would be characters rather than factors.
+of the assignment asked us to Use descriptive activity names to name the activities in the data set, for example, instead of an activity label of "1" or "5", use the associated activity name like "LAYING" or "SITTING". I read in the activity labels and activity names from the activity_labels.txt file. It also required a change of variable names, to prevent duplicate column names in the data after it was merged. I changed the column names and merged the combined_table with the activity_labels, putting the result into a new table "data3". (Again using "stringsAsFactors=F" when reading the activity labels, so they would be characters rather than factors.)
 
   	  activity_labels <- tbl_df(read.table("./data/UCI HAR Dataset/activity_labels.txt",stringsAsFactors=F))
   	  names(activity_labels)[names(activity_labels)=="V1"] <- "activity_label"
@@ -92,13 +93,15 @@ of the assignment asked us to Use descriptive activity names to name the activit
  	  data3 <- merge(combined_table,activity_labels,by="activity_label")
 
 ## PART 2 
-of the assignment asked us to extract only the measurements on the mean and standard deviation for each measurement. I opted to use the "contains" option to select all columns where the word "mean" or "std" existed in the column name. Although I did not see the use for the "MeanFreq" columns, I thought this was a small price to pay for such a quick and easy way to select the desired columns. (I later learned that I could have looked for names that contained the "mean(" or "std(" string to get just the columns I wanted.)
+of the assignment asked us to extract only the measurements on the mean and standard deviation for each measurement. I opted to use the "contains" option to select all columns where the word "mean" or "std" existed in the column name. Although I did not see the use for the "MeanFreq" columns, I thought this was a small price to pay for such a quick and easy way to select the desired columns. (I later learned that I could have looked for names that contained the "mean(" or "std(" string to get just the columns I wanted, using the Fixed=TRUE option.)
 
     	  new_data <- tbl_df(select(data3,subject,activity,contains("mean"),contains("std")))
 
 ## PART 5 
 of the assignment asked us to create a second, independent tidy data set with the average of each variable for each activity and each subject. I used the group_by and summarise_each functions to accomplish this.
-    tidy_data <- summarise_each(group_by(new_data,subject,activity),funs(mean))  
+
+	  tidy_data <- summarise_each(group_by(new_data,subject,activity),funs(mean))  
+
 I tidied up the column names by removing the "()" characters and added a prefix os "Mean_of_" to each of the column names in the final tidy dataset. I then wrote the resulting table "tidy_data" to a file using the row.names=F option, as requested in the instructions.
 
 	  colnames(tidy_data) <- gsub("()", "", colnames(tidy_data),fixed=TRUE) 
@@ -110,4 +113,4 @@ There are additional efficiencies that could be introduced into this program inc
 - I could have used more of the functionality in dplyr, rather than using the summarize and group_by commands on their own
 - I could have done more chaining of commands
 
-Overall I found the assignment to be a valuable learning tool for learning many new concepts in R. There are a variety of ways to accomplish things in R, and I suspect that my style in writing R will improve over time and will product more efficient code. I plan to, in the future, use some of the system metrics to measure the efficiency of this code, then make improvements to it.
+Overall I found the assignment to be a valuable learning tool for learning many new concepts in R. There are a variety of ways to accomplish things in R, and I suspect that my style in writing R will improve over time and will produce more efficient code. I plan to, in the future, use some of the system metrics to measure the efficiency of this code, then make improvements to it.
