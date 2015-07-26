@@ -25,7 +25,7 @@ The code requires the use of the dplyr function, which was developed by Hadley W
 The dplyr function facilitates easier analysis using tabular data tools.
 The library is loaded using the following code:
 '''
-	library(dplyr)
+	 library(dplyr)
 '''
 ### Downloading and preparing files
 
@@ -38,12 +38,13 @@ I created a sub_directory to contain the various directories and files obtained 
          }
 I then unzip the file into the "data" directory
 
-	unzip ("./getdata-projectfiles-UCI HAR Dataset.zip",exdir = "./data")
+	 unzip ("./getdata-projectfiles-UCI HAR Dataset.zip",exdir = "./data")
 
 and read in the desired datasets. I determined that I needed the following 6 files to create a full set of data for each of the training and test datasets.
-    test_data_X <- read.table("./data/UCI HAR Dataset/test/X_test.txt",)              
-    test_data_Y <- read.table("./data/UCI HAR Dataset/test/Y_test.txt")
-    subject_test <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")
+
+	 test_data_X <- read.table("./data/UCI HAR Dataset/test/X_test.txt",)              
+	 test_data_Y <- read.table("./data/UCI HAR Dataset/test/Y_test.txt")
+	 subject_test <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")
     train_data_X <- read.table("./data/UCI HAR Dataset/train/X_train.txt")     
     train_data_Y <- read.table("./data/UCI HAR Dataset/train/Y_train.txt")
     subject_train <- read.table("./data/UCI HAR Dataset/train/subject_train.txt")
