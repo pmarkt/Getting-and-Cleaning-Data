@@ -45,7 +45,7 @@ and read in the desired datasets. I determined that I needed the following 6 fil
 	 test_data_X <- read.table("./data/UCI HAR Dataset/test/X_test.txt",)              
 	 test_data_Y <- read.table("./data/UCI HAR Dataset/test/Y_test.txt")
 	 subject_test <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")
-    	 train_data_X <- read.table("./data/UCI HAR Dataset/train/X_train.txt")     
+	 train_data_X <- read.table("./data/UCI HAR Dataset/train/X_train.txt")     
    	 train_data_Y <- read.table("./data/UCI HAR Dataset/train/Y_train.txt")
   	 subject_train <- read.table("./data/UCI HAR Dataset/train/subject_train.txt")
 
@@ -104,3 +104,10 @@ I tidied up the column names by removing the "()" characters and added a prefix 
 	  colnames(tidy_data) <- gsub("()", "", colnames(tidy_data),fixed=TRUE) 
 	  colnames(tidy_data)[3:88] <- paste( "Mean_of", colnames(tidy_data)[3:88],sep="_")
 	  write.table(tidy_data,file="./tidy_data.txt",row.names=FALSE)
+
+There are additional efficiencies that could be introduced into this program including the following:
+- I kept renaming the data table (data3,combined_table,new_data,tidy_data....) which probably used a lot of unnecessary space. I could have made the changes in the original dataset.
+- I could have used more of the functionality in dplyr, rather than using the summarize and group_by commands on their own
+- I could have done more chaining of commands
+
+Overall I found the assignment to be a valuable learning tool for learning many new concepts in R. There are a variety of ways to accomplish things in R, and I suspect that my style in writing R will improve over time and will product more efficient code. I plan to, in the future, use some of the system metrics to measure the efficiency of this code, then make improvements to it.
