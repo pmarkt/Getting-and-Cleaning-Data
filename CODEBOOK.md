@@ -24,18 +24,22 @@ The code accomplishes the following:
 The code requires the use of the dplyr function, which was developed by Hadley Wickham, an Assistant Professor of Statistics at Rice University. For more information on Mr. Wickham, see his web site "http://had.co.nz/"
 The dplyr function facilitates easier analysis using tabular data tools.
 The library is loaded using the following code:
+'''
 	library(dplyr)
-
+'''
 ### Downloading and preparing files
 
 This script assumes that **the zipped file of Samsung data has already been downloaded into your working directory.** The zipped file name is "getdata-projectfiles-UCI HAR Dataset.zip" You should be sure to check that this zipped file exists in your working directory before running the code in run_analysis.R.
 
 I created a sub_directory to contain the various directories and files obtained from the zip file, after first checking to see if the directory already exists
-	if (!file.exists("data"))   {
-	    dir.create("data")
-            }
+	
+	 if (!file.exists("data"))   {
+	 dir.create("data")
+         }
 I then unzip the file into the "data" directory
+
 	unzip ("./getdata-projectfiles-UCI HAR Dataset.zip",exdir = "./data")
+
 and read in the desired datasets. I determined that I needed the following 6 files to create a full set of data for each of the training and test datasets.
     test_data_X <- read.table("./data/UCI HAR Dataset/test/X_test.txt",)              
     test_data_Y <- read.table("./data/UCI HAR Dataset/test/Y_test.txt")
